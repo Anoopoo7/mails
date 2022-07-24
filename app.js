@@ -28,8 +28,9 @@ let transport = nodemailer.createTransport({
     },
 });
 
-function constructMessage(message, keys) {
+function constructMessage(message, body) {
     let msg = message;
+    let keys = body.keysWords;
     Object.entries(keys).map((item) => {
         msg = msg.replace(item[0], item[1]);
     });
@@ -37,12 +38,11 @@ function constructMessage(message, keys) {
 }
 
 const startMail = async(result, body) => {
-    console.log(result);
     const mailOptions = {
         from: "mails.lxiya@gmail.com",
         to: body.to,
         subject: result.subject,
-        html: constructMessage(result.message, body.KeysWords),
+        html: constructMessage(result.message, body),
     };
     transport.sendMail(mailOptions, function(err, info) {
         if (err) {
