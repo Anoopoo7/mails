@@ -57,7 +57,7 @@ const startMail = async (result, body) => {
   }
 };
 app.get("/", async (req, res) => {
-  res.send("success");
+  res.send("success !");
 });
 
 app.post("/send", async (req, res) => {
